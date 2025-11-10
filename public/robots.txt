@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://dhwanilpanchani.com/sitemap.xml
+
+# Disallow admin or private routes
+Disallow: /api/

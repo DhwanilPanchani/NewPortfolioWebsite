@@ -1,0 +1,35 @@
+### Node / Next.js
+node_modules/
+.next/
+out/
+.turbo/
+.vercel/
+
+### Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+### Testing
+coverage/
+.eslintcache
+
+### Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+### TypeScript build info
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+### Editor/OS junk
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+Thumbs.db

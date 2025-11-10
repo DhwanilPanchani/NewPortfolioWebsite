@@ -1,0 +1,35 @@
+{
+  "education": [
+    {
+      "id": "northeastern-ms",
+      "institution": "Northeastern University",
+      "degree": "Master of Science",
+      "field": "Information Systems",
+      "location": "Boston, MA",
+      "startDate": "Sept 2023",
+      "endDate": "May 2025",
+      "gpa": "",
+      "relevantCourses": [
+        "Data Science & ML",
+        "GenAI",
+        "Data Structures & Algorithms",
+        "Web Design",
+        "Parallel ML",
+        "Application Engineering"
+      ],
+      "achievements": []
+    },
+    {
+      "id": "gtu-bachelor",
+      "institution": "Gujarat Technological University",
+      "degree": "Bachelor of Engineering",
+      "field": "Computer Engineering",
+      "location": "Gujarat, India",
+      "startDate": "July 2019",
+      "endDate": "May 2023",
+      "gpa": "",
+      "relevantCourses": [],
+      "achievements": []
+    }
+  ]
+}

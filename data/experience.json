@@ -1,0 +1,80 @@
+{
+  "experiences": [
+    {
+      "id": "ipserlab-ai-engineer",
+      "company": "IpserLab",
+      "position": "AI Engineer",
+      "location": "San Francisco, CA",
+      "startDate": "June 2025",
+      "endDate": "Present",
+      "type": "Full-time",
+      "description": "Leading AI platform development and microservice architecture",
+      "achievements": [
+        "Engineered microservice-based full-stack systems using React, Node.js, and AWS Lambda, achieving 97.9% uptime and p95 latency <250ms",
+        "Developed secure REST and GraphQL APIs with Express.js and MongoDB, cutting data retrieval time by 40%",
+        "Innovated real-time ML inference pipelines via TensorFlow.js and Redis caching, improving throughput by 52%",
+        "Deployed containerized microservices using Docker and Kubernetes, enabling zero-downtime rollouts"
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "AWS Lambda",
+        "TensorFlow.js",
+        "MongoDB",
+        "Docker",
+        "Kubernetes",
+        "Redis"
+      ]
+    },
+    {
+      "id": "techvizor-software-engineer",
+      "company": "TechVizor",
+      "position": "Software Engineer",
+      "location": "Surat, India",
+      "startDate": "Aug 2021",
+      "endDate": "Jul 2023",
+      "type": "Full-time",
+      "description": "Full-stack development and ML integration for enterprise applications",
+      "achievements": [
+        "Delivered 8+ production-grade web applications with React, Node.js, Express, and MongoDB, serving 100K+ users",
+        "Streamlined CI/CD with Jenkins, Docker, and Terraform, reducing release cycles from 3 days to 6 hours",
+        "Enhanced database performance using Redis caching and PostgreSQL partitioning, sustaining 99.95% uptime",
+        "Integrated ML-driven personalization features with Next.js and TypeScript, increasing user engagement by 35%",
+        "Directed 5-member cross-functional team, improving velocity by 25% and reducing post-deploy defects by 30%"
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "PostgreSQL",
+        "Redis",
+        "Jenkins",
+        "Docker",
+        "Terraform"
+      ]
+    },
+    {
+      "id": "techvizor-intern",
+      "company": "TechVizor",
+      "position": "Software Developer Intern",
+      "location": "Surat, India",
+      "startDate": "May 2021",
+      "endDate": "Jul 2021",
+      "type": "Internship",
+      "description": "Full-stack feature development and testing",
+      "achievements": [
+        "Assisted in building React + Node.js micro-features on AWS, improving UX for 10+ product modules",
+        "Supported API development using Express.js and MongoDB, writing Jest-based tests with 85% coverage"
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "AWS",
+        "Jest"
+      ]
+    }
+  ]
+}

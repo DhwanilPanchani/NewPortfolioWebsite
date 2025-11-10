@@ -1,0 +1,71 @@
+{
+  "skillCategories": [
+    {
+      "category": "Languages & Frameworks",
+      "skills": [
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "Python",
+        "React",
+        "Next.js",
+        "Node.js",
+        "Express.js"
+      ]
+    },
+    {
+      "category": "Backend & APIs",
+      "skills": [
+        "REST",
+        "GraphQL",
+        "Microservices",
+        "WebSockets",
+        "JWT/OAuth2",
+        "gRPC",
+        "AWS Lambda"
+      ]
+    },
+    {
+      "category": "Databases",
+      "skills": [
+        "MongoDB",
+        "PostgreSQL",
+        "Redis",
+        "Prisma ORM",
+        "Query Optimization"
+      ]
+    },
+    {
+      "category": "AI & ML",
+      "skills": [
+        "TensorFlow.js",
+        "PyTorch",
+        "OpenAI/Gemini APIs",
+        "LangChain",
+        "Vector Databases",
+        "Hugging Face"
+      ]
+    },
+    {
+      "category": "Cloud & DevOps",
+      "skills": [
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "CI/CD",
+        "Terraform",
+        "Vercel",
+        "GitHub Actions"
+      ]
+    },
+    {
+      "category": "Tools & Practices",
+      "skills": [
+        "Git",
+        "Agile/Scrum",
+        "Performance Tuning",
+        "Testing (Jest, Playwright)",
+        "Grafana"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "featuredProjects": [
+    {
+      "id": "data-intelligence-hub",
+      "title": "Data Intelligence Hub",
+      "description": "AI-driven analytics platform with Django REST + Flask APIs, JWT-secured data exchange, and Gemini LLM integration for natural-language analytics queries. Accelerated data insights generation by 3×.",
+      "image": "/images/projects/data-hub.jpg",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Python",
+        "Django",
+        "Flask",
+        "PostgreSQL",
+        "Docker",
+        "Gemini API"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/data-intelligence-hub",
+      "liveUrl": "",
+      "featured": true,
+      "category": "Data Science",
+      "details": {
+        "challenge": "Organizations struggle to extract actionable insights from large datasets quickly, requiring technical SQL knowledge.",
+        "solution": "Built an AI-assisted analytics hub allowing natural language queries through Gemini LLM integration, with secure JWT authentication and containerized deployment.",
+        "impact": [
+          "3× faster data insights generation",
+          "Reduced technical barrier for analysts",
+          "One-click deployment with Docker Compose"
+        ],
+        "keyFeatures": [
+          "Natural language to SQL query conversion",
+          "Real-time data visualization",
+          "Role-based access control",
+          "Automated report generation"
+        ]
+      }
+    },
+    {
+      "id": "echoai",
+      "title": "EchoAI - Speech Coaching Platform",
+      "description": "Real-time speech intelligence engine using TensorFlow.js and WebSockets, achieving sub-100ms latency. AI-powered coaching for 100+ active users with MongoDB persistence.",
+      "image": "/images/projects/echoai.jpg",
+      "technologies": [
+        "TypeScript",
+        "Node.js",
+        "WebSockets",
+        "MongoDB",
+        "TensorFlow.js",
+        "Next.js"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/EchoAI-AI-powered-public-speaking-coach",
+      "liveUrl": "",
+      "featured": true,
+      "category": "Full Stack",
+      "details": {
+        "challenge": "Language learners need real-time feedback on pronunciation, pacing, and clarity but lack accessible coaching tools.",
+        "solution": "Developed a real-time speech analysis platform using TensorFlow.js for browser-based ML inference and WebSockets for instant feedback.",
+        "impact": [
+          "Sub-100ms latency for real-time feedback",
+          "100+ active users globally",
+          "Improved retention and learning outcomes"
+        ],
+        "keyFeatures": [
+          "Real-time pronunciation analysis",
+          "Speech pattern visualization",
+          "Progress tracking dashboard",
+          "Personalized improvement suggestions"
+        ]
+      }
+    },
+    {
+      "id": "cross-border-payment-analyzer",
+      "title": "Cross-Border Payment Routing Analyzer",
+      "description": "Production-grade data product identifying $2B+ in hidden FX markup inefficiencies using causal inference (DiD, PSM, DoWhy) and ML-driven fee optimization with XGBoost + SHAP.",
+      "image": "/images/projects/payment-analyzer.jpg",
+      "technologies": [
+        "Python",
+        "XGBoost",
+        "SHAP",
+        "DoWhy",
+        "SQL",
+        "Streamlit",
+        "Docker"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/Cross-Border-Payment-Routing-Arbitrage-Analyzer",
+      "liveUrl": "",
+      "featured": true,
+      "category": "Data Science",
+      "details": {
+        "challenge": "Global merchants lose billions in hidden FX fees due to suboptimal payment routing strategies.",
+        "solution": "Built an explainable ML pipeline using causal inference techniques to identify fee optimization opportunities with automated ETL and Docker CI/CD.",
+        "impact": [
+          "$2B+ in identified inefficiencies",
+          "3.2% average cost savings",
+          "92% reduction in analysis time"
+        ],
+        "keyFeatures": [
+          "Causal inference modeling (DiD, PSM)",
+          "Explainable AI with SHAP",
+          "Interactive Streamlit dashboard",
+          "Automated ETL with SQLAlchemy"
+        ]
+      }
+    }
+  ],
+  "allProjects": [
+    {
+      "id": "medlens-ar",
+      "title": "MedLens AR",
+      "description": "Medical AI platform combining FastAPI backend with React Native frontend for medical training with AR capabilities.",
+      "image": "/images/projects/medlens.jpg",
+      "technologies": [
+        "FastAPI",
+        "React Native",
+        "TensorFlow",
+        "ARKit",
+        "MongoDB"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/MedLens-AR",
+      "featured": false,
+      "category": "Full Stack"
+    },
+    {
+      "id": "securecode-ai",
+      "title": "SecureCode AI",
+      "description": "Automated vulnerability detection system achieving 98% accuracy using ML-based code analysis.",
+      "image": "/images/projects/securecode.jpg",
+      "technologies": [
+        "Python",
+        "TensorFlow",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/SecureCode-AI-based-Intelligent-Vulnerability-Detection-System",
+      "featured": false,
+      "category": "Security"
+    },
+    {
+      "id": "skin-disease-classification",
+      "title": "Skin Disease Classification",
+      "description": "Distributed training pipeline with PyTorch DDP achieving 4× speedup with 91% accuracy across 35 disease classes.",
+      "image": "/images/projects/skin-disease.jpg",
+      "technologies": [
+        "PyTorch",
+        "NCCL",
+        "CUDA",
+        "DDP",
+        "EfficientNet"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/Skin-Disease-Classification-using-Parallel-Deep-Learning",
+      "featured": false,
+      "category": "AI/ML"
+    },
+    {
+      "id": "walmart-sales-analysis",
+      "title": "Walmart Sales Analysis",
+      "description": "Analyzed 45K+ transactional records using Python to uncover seasonal trends and identify 12% improvement potential.",
+      "image": "/images/projects/walmart.jpg",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "SQL",
+        "Seaborn",
+        "Plotly",
+        "Scikit-learn"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/Walmart-Sales-Analysis",
+      "featured": false,
+      "category": "Data Science"
+    },
+    {
+      "id": "Grid-sentry",
+      "title": "GridSentry",
+      "description": "AI-powered electric grid forecasting system using deep learning to predict energy demand with 95% accuracy.",
+      "image": "/images/projects/grid-sentry.jpg",
+      "technologies": [
+        "Python",
+        "PyTorch",
+        "NumPy",
+        "Transformers",
+        "Matplotlib",
+        "SciPy"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/GridSentry---AI-Powered-Electric-Grid-Forecasting-system",
+      "featured": false,
+      "category": "Data Science"
+    },
+    {
+      "id": "Caption-Generation",
+      "title": "GRU and LSTM-Based Image Captioning Models",
+      "description": "Image captioning model using CNN + LSTM achieving 80% accuracy on Flickr8k dataset.",
+      "image": "/images/projects/captiongen.jpg",
+      "technologies": [
+        "TensorFlow/Keras",
+        "NumPy",
+        "nltk",
+        "sklearn",
+        "LSTM",
+        "SciPy"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/Generative-AI-Projects/tree/main/Caption_Generation",
+      "featured": false,
+      "category": "AI/ML"
+    },
+    {
+      "id": "Diffusin-Model",
+      "title": "Fine-Tuning CLIP and Diffusion Model for Image Generation",
+      "description": "Custom diffusion model fine-tuned on Flickr8k dataset with CLIP for improved image captioning.",
+      "image": "/images/projects/diffusion.jpg",
+      "technologies": [
+        "OpenAI CLIP",
+        "VAE",
+        "U-Net",
+        "Pytorch",
+        "Python",
+        "SciPy"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/Generative-AI-Projects/tree/main/Custom%20Diffusion%20Model(Flickr%2CCIFAR)",
+      "featured": false,
+      "category": "AI/ML"
+    },
+    {
+      "id": "CosmoPlan-DMDD",
+      "title": "Space Exploration Database Management System",
+      "description": "Custom diffusion model fine-tuned on Flickr8k dataset with CLIP for improved image captioning.",
+      "image": "/images/projects/space.jpg",
+      "technologies": [
+        "Java SwingUI",
+        "MSSQL",
+        "Database Management",
+        "ERD Design"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/CosmoPlan-DMDD",
+      "featured": false,
+      "category": "Full Stack"
+    },
+    {
+      "id": "Plant Disease Detection",
+      "title": "Plant Disease Detection",
+      "description": "This project uses PyTorch to build a Convolutional Neural Network (CNN) that detects plant diseases from leaf images.",
+      "image": "/images/projects/plant.jpg",
+      "technologies": [
+        "Python",
+        "Pytorch",
+        "CNN",
+        "Transfer Learning"
+      ],
+      "githubUrl": "https://github.com/DhwanilPanchani/Plant-Disease-Detection",
+      "featured": false,
+      "category": "Data Science"
+    }
+  ]
+}
