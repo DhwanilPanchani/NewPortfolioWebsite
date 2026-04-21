@@ -1,38 +1,38 @@
 # Dhwanil Panchani - Portfolio Website
 
-A modern, high-performance portfolio website built with Next.js 15, React Three Fiber, and Framer Motion. Features 3D animations, dark mode, and a futuristic glassmorphism design.
+A modern, high-performance portfolio website built with Next.js 15, React Three Fiber, GSAP, and Tailwind CSS. The site features smooth scrolling, aesthetic animations, magnetic interactions, and a rich user experience tailored for performance.
 
 ## 🚀 Tech Stack
 
 - **Framework:** Next.js 15 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
-- **Animations:** Framer Motion, React Three Fiber
-- **3D Graphics:** Three.js, @react-three/drei
+- **Animations:** GSAP, Framer Motion
+- **3D Graphics:** Three.js, React Three Fiber, `@react-three/drei`
+- **Smooth Scrolling:** Lenis
+- **Forms/Email:** Nodemailer
 - **Testing:** Jest, React Testing Library
-- **CI/CD:** GitHub Actions
 - **Deployment:** Vercel
 
-## ✨ Features
+## ✨ Key Features
 
-- ⚡ Lightning-fast performance with Next.js 15
-- 🎨 Modern glassmorphism UI with smooth animations
-- 🌓 Dark/Light mode with system preference detection
-- 🎭 Interactive 3D particle background
+- ⚡ **Next.js 15 App Router** for lightning-fast loading and server-side rendering
+- 🎨 **Modern UI** built with Tailwind CSS, utilizing glassmorphism and modern layouts
+- 🎭 **Advanced Animations** executed via GSAP and Framer Motion (`TextReveal`, `MagneticCursor`, `TiltCard`)
+- 🌀 **Smooth Scrolling** powered by Lenis (`SmoothScroll` component)
+- 🌓 **Dark Mode** integrated styling
 - 📱 Fully responsive (mobile-first design)
-- ♿ WCAG AA accessible
-- 🔍 SEO optimized with metadata and sitemap
-- 🧪 Comprehensive test coverage
-- 🚀 Optimized for Core Web Vitals
+- 📧 **Integrated Contact API** powered by Nodemailer
 
-## 📦 Installation
+## 📦 Installation & Setup
+
 ```bash
 # Clone the repository
-git clone https://github.com/DhwanilPanchani/portfolio.git
-cd portfolio
+git clone https://github.com/DhwanilPanchani/NewPortfolioWebsite.git
+cd NewPortfolioWebsite
 
-# Install dependencies
-npm install
+# Install dependencies (use legacy-peer-deps to avoid React 19 warnings with Drei)
+npm install --legacy-peer-deps
 
 # Set up environment variables
 cp .env.example .env.local
@@ -42,12 +42,13 @@ cp .env.example .env.local
 npm run dev
 ```
 
-
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 ## 🛠️ Available Scripts
+
 ```bash
 # Development
-npm run dev          # Start dev server with Turbopack
+npm run dev          # Start dev server
 npm run build        # Build for production
 npm run start        # Start production server
 
@@ -62,202 +63,45 @@ npm run test:ci      # Run tests once (CI mode)
 ```
 
 ## 🏗️ Project Structure
+
 ```
 ├── app/
-│   ├── (pages)/           # Route pages
-│   │   ├── about/
-│   │   ├── contact/
-│   │   ├── education/
-│   │   ├── experience/
-│   │   └── projects/
-│   ├── api/               # API routes
+│   ├── (pages)/           # Route pages (about, contact, education, etc.)
+│   ├── api/               # API routes (contact form, health checks)
 │   ├── components/        # React components
-│   │   ├── core/          # Core components (NavBar, Footer, etc.)
-│   │   ├── home/          # Home page components
-│   │   ├── projects/      # Project components
-│   │   └── shared/        # Shared components
+│   │   ├── core/          # Core components (NavBar, Footer)
+│   │   ├── home/          # Home page sections (Hero, FeaturedProjects, Skills, etc.)
+│   │   └── ui/            # Reusable UI interactions (MagneticCursor, SmoothScroll, TiltCard)
 │   ├── globals.css        # Global styles
 │   ├── layout.tsx         # Root layout
 │   └── page.tsx           # Home page
-├── data/                  # JSON data files
+├── data/                  # Static data for content
 ├── lib/                   # Utility functions
 ├── public/                # Static assets
-├── tests/                 # Test files
-└── ...config files
+└── tests/                 # Test files
 ```
-
-## 🎨 Design System
-
-### Color Palette
-```typescript
-Primary:    #6366F1 (Indigo)
-Secondary:  #EC4899 (Pink)
-Accent:     #14B8A6 (Teal)
-Background: #FAFAFA (Light) / #0A0A0F (Dark)
-Surface:    #FFFFFF (Light) / #1A1A24 (Dark)
-```
-
-### Typography
-
-- **Sans:** Inter Variable, system-ui
-- **Mono:** Fira Code Variable, Consolas
-- **Display:** Cal Sans, Inter Variable
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
+This application is configured for seamless deployment on **Vercel**. 
 
 1. Push your code to GitHub
 2. Import your repository in [Vercel](https://vercel.com)
-3. Configure environment variables
-4. Deploy!
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-### Other Platforms
-
-The site can be deployed to any platform supporting Next.js:
-
-- **Netlify:** Use `next export` or Netlify adapter
-- **AWS Amplify:** Connect GitHub repository
-- **Docker:** Build container with `docker build`
+3. Target dependencies conflict gracefully via Vercel settings if needed (though the committed `.npmrc` handles this automatically!)
+4. Add any environment variables (`EMAIL_USER`, `EMAIL_PASS`, etc.)
+5. Deploy!
 
 ## 🔐 Environment Variables
 
-Create a `.env.local` file:
+Ensure your `.env.local` or environment secrets are set up correctly:
 ```bash
 # Site Configuration
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 
-# Contact Form (Optional)
-SENDGRID_API_KEY=your_sendgrid_api_key
-CONTACT_EMAIL=your@email.com
-
-# Analytics (Optional)
-NEXT_PUBLIC_GA_ID=your_google_analytics_id
+# Email Configuration (for Nodemailer)
+EMAIL_USER=your_email@domain.com
+EMAIL_PASS=your_app_password
 ```
-
-## 📊 Performance Optimization
-
-### Lighthouse Targets
-
-- **Performance:** ≥ 90
-- **Accessibility:** ≥ 90
-- **Best Practices:** ≥ 90
-- **SEO:** 100
-
-### Optimization Strategies
-
-1. **Images:** Next/Image with AVIF/WebP formats
-2. **Fonts:** Variable fonts with font-display: swap
-3. **3D Scenes:** Lazy loaded with performance detection
-4. **Code Splitting:** Dynamic imports for heavy components
-5. **Caching:** Aggressive caching with ISR
-6. **Bundle Size:** Tree shaking and code optimization
-
-### Running Lighthouse
-```bash
-# Install Lighthouse
-npm install -g lighthouse
-
-# Run audit
-npm run build
-npm start
-lighthouse http://localhost:3000 --view
-```
-
-## 🧪 Testing
-```bash
-# Run all tests
-npm test
-
-# Run specific test file
-npm test NavBar.test.tsx
-
-# Generate coverage report
-npm test -- --coverage
-
-# Update snapshots
-npm test -- -u
-```
-
-## 📝 Content Management
-
-### Adding Projects
-
-Edit `data/projects.json`:
-```json
-{
-  "id": "unique-id",
-  "title": "Project Title",
-  "description": "Short description",
-  "image": "/images/projects/project.jpg",
-  "technologies": ["React", "TypeScript"],
-  "githubUrl": "https://github.com/...",
-  "featured": true,
-  "category": "AI/ML"
-}
-```
-
-### Resume Parsing
-
-Place resume files in `data/resumes/` and run the parser:
-```bash
-node scripts/parse-resumes.js
-```
-
-Supported formats: PDF, DOCX, JSON
-
-## 🎯 Roadmap
-
-### Alpha (MVP) ✅
-- Core pages and navigation
-- Project showcase
-- Contact form
-- Dark mode
-- Basic animations
-
-### Beta (Performance Tuning)
-- [ ] Lighthouse optimizations
-- [ ] Advanced 3D scenes
-- [ ] Blog functionality
-- [ ] Analytics integration
-- [ ] Comprehensive test coverage
-
-### Production (Scale)
-- [ ] CDN integration
-- [ ] A/B testing
-- [ ] Advanced SEO
-- [ ] Performance monitoring
-- [ ] User analytics
-
-## 🐛 Known Issues & Trade-offs
-
-1. **3D Performance:** Heavy 3D scenes may impact Lighthouse scores. Mitigated with:
-   - Hardware detection
-   - Reduced motion support
-   - Lazy loading
-   - Static fallbacks
-
-2. **Bundle Size:** Three.js adds ~150KB. Mitigated with:
-   - Dynamic imports
-   - Tree shaking
-   - Code splitting
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## 📄 License
 
@@ -265,14 +109,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 📧 Contact
 
-Dhwanil Panchani - [dhwanilpanchani@gmail.com](mailto:dhwanilpanchani@gmail.com)
+**Dhwanil Panchani** - [dhwanilpanchani@gmail.com](mailto:dhwanilpanchani@gmail.com)
 
-
-
-## 🙏 Acknowledgments
-
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/)
-- [Vercel](https://vercel.com/)
+Project Link: [https://github.com/DhwanilPanchani/NewPortfolioWebsite](https://github.com/DhwanilPanchani/NewPortfolioWebsite)
