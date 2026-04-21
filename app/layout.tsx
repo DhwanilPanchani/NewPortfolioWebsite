@@ -1,22 +1,35 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-import { Providers } from './providers';
 import { generateSiteMetadata } from '@/lib/seo';
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+});
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-geist-sans',
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
 const baseMetadata = generateSiteMetadata();
 
-// Favicon configuration
 export const metadata: Metadata = {
   ...baseMetadata,
-  // Remove any icon configurations from baseMetadata
   icons: undefined,
+};
+
+export const viewport: Viewport = {
+  themeColor: '#0A0A0A',
 };
 
 export default function RootLayout({
@@ -25,21 +38,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
+    >
       <head>
-        <base href="/" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#ffffff" />
       </head>
-      <body>
-        <Providers>
-          {children}
-        </Providers>
+      <body className="font-sans text-stone-200 bg-[#0A0A0A]" suppressHydrationWarning>
+        {children}
       </body>
     </html>
   );

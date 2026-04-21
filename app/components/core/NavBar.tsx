@@ -1,16 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
-import { useTheme } from './ThemeProvider';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/projects', label: 'Projects' },
+  { href: '/projects', label: 'Work' },
   { href: '/experience', label: 'Experience' },
   { href: '/education', label: 'Education' },
   { href: '/about', label: 'About' },
@@ -18,203 +14,193 @@ const navItems = [
 ];
 
 export default function NavBar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  const panelRef = useRef<HTMLDivElement | null>(null);
-  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close menu when route changes
   useEffect(() => {
-    setIsOpen(false);
+    setMenuOpen(false);
   }, [pathname]);
 
-  // Body scroll lock, Escape to close, basic focus trap, and background refinement
   useEffect(() => {
-    if (!isOpen) {
-      document.body.style.overflow = '';
-      document.documentElement.classList.remove('drawer-open');
-      return;
-    }
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
-    document.body.style.overflow = 'hidden';
-    document.documentElement.classList.add('drawer-open');
-
-    // Initial focus to close button for accessibility
-    closeBtnRef.current?.focus();
-
-    const keyHandler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsOpen(false);
-        return;
-      }
-
-      if (e.key === 'Tab' && panelRef.current) {
-        const focusables = Array.from(
-          panelRef.current.querySelectorAll<HTMLElement>(
-            'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
-          )
-        ).filter((el) => !el.hasAttribute('disabled'));
-
-        if (focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-
-        if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        } else if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
-      }
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
     };
-
-    document.addEventListener('keydown', keyHandler);
-    return () => {
-      document.body.style.overflow = '';
-      document.removeEventListener('keydown', keyHandler);
-    };
-  }, [isOpen]);
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/80 dark:bg-gray-900/80 shadow-lg backdrop-blur-md'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" aria-label="Home">
-            <Image
-              src="/images/navbar/dp.jpg"
-              alt="Dhwanil Panchani logo"
-              width={48}
-              height={48}
-              quality={100}
-              priority
-              className="rounded-full ring-1 ring-gray-200 dark:ring-gray-800 hover:scale-[1.03] transition-transform"
-              sizes="(max-width: 1024px) 40px, 48px"
-            />
+    <>
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'py-4 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-[#222]'
+            : 'py-6 bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="group flex items-center gap-1"
+            data-cursor="hover"
+          >
+            <span className="font-display text-lg font-bold text-text-primary tracking-tight">
+              dhwanil
+            </span>
+            <span className="font-display text-lg font-bold text-accent">.</span>
           </Link>
 
-          {/* Desktop Nav (visible on large screens and up) */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle theme"
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  data-cursor="hover"
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
+                    isActive ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute inset-0 rounded-lg bg-surface-raised border border-border"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Right: CTA + Hamburger */}
+          <div className="flex items-center gap-4">
+            <a
+              href="mailto:dhwanilpanchani@gmail.com"
+              data-cursor="hover"
+              className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-text-primary border border-border hover:border-accent hover:text-accent rounded-lg transition-all duration-300"
             >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              Let&apos;s Talk
+            </a>
+
+            {/* Hamburger */}
+            <button
+              className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+            >
+              <motion.span
+                className="block w-6 h-px bg-text-primary origin-center"
+                animate={menuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.span
+                className="block w-6 h-px bg-text-primary"
+                animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="block w-6 h-px bg-text-primary origin-center"
+                animate={menuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+              />
             </button>
           </div>
-
-          {/* Mobile/Tablet Menu Button */}
-          <button
-            className="lg:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
-      </div>
+      </motion.header>
 
-      {/* Mobile/Tablet Drawer Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
-        {isOpen && (
+        {menuOpen && (
           <>
-            {/* Overlay */}
-            <motion.button
-              aria-label="Close menu"
-              className="fixed inset-0 z-40 bg-black/90 lg:hidden"
+            <motion.div
+              key="overlay"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
+              onClick={() => setMenuOpen(false)}
             />
-
-            {/* Drawer Panel */}
-            <motion.div
-              id="mobile-menu"
-              ref={panelRef}
+            <motion.nav
+              key="panel"
               role="dialog"
               aria-modal="true"
-              aria-labelledby="mobile-menu-title"
-              className="fixed right-0 top-16 bottom-0 z-50 w-full lg:hidden bg-white dark:bg-gray-900 shadow-2xl"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="fixed inset-0 z-50 md:hidden bg-[#0A0A0A] flex flex-col"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex items-center justify-between h-16 px-4">
-                <Link href="/" aria-label="Home" onClick={() => setIsOpen(false)}>
-                  <Image
-                    src="/images/navbar/dp.jpg"
-                    alt="Dhwanil Panchani logo"
-                    width={40}
-                    height={40}
-                    quality={100}
-                    className="rounded-full ring-1 ring-gray-200 dark:ring-gray-800"
-                    sizes="40px"
-                  />
-                </Link>
+              {/* Close */}
+              <div className="flex items-center justify-between p-6">
+                <span className="font-display text-lg font-bold text-text-primary">
+                  dhwanil<span className="text-accent">.</span>
+                </span>
                 <button
-                  ref={closeBtnRef}
-                  className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setMenuOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center text-text-secondary"
                   aria-label="Close menu"
                 >
-                  <X size={22} />
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <line x1="4" y1="4" x2="16" y2="16" />
+                    <line x1="16" y1="4" x2="4" y2="16" />
+                  </svg>
                 </button>
               </div>
 
-              <nav className="px-4 py-2 space-y-0 divide-y divide-gray-200 dark:divide-gray-800">
-                {navItems.map((item) => (
-                  <Link
+              {/* Links */}
+              <div className="flex-1 flex flex-col justify-center px-8 gap-2">
+                {[{ href: '/', label: 'Home' }, ...navItems].map((item, i) => (
+                  <motion.div
                     key={item.href}
-                    href={item.href}
-                    className="block px-3 py-4 text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                    onClick={() => setIsOpen(false)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 * i, duration: 0.4 }}
                   >
-                    {item.label}
-                  </Link>
+                    <Link
+                      href={item.href}
+                      className={`block py-4 text-3xl font-display font-bold border-b border-border transition-colors ${
+                        pathname === item.href ? 'text-accent' : 'text-text-secondary hover:text-text-primary'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
                 ))}
+              </div>
 
-                <button
-                  onClick={toggleTheme}
-                  className="mt-2 flex items-center justify-between w-full px-3 py-4 text-lg font-medium text-gray-900 dark:text-gray-100"
+              <div className="p-8 border-t border-border">
+                <a
+                  href="mailto:dhwanilpanchani@gmail.com"
+                  className="text-sm text-text-tertiary hover:text-accent transition-colors"
                 >
-                  <span>Toggle Theme</span>
-                  {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
-              </nav>
-            </motion.div>
+                  dhwanilpanchani@gmail.com
+                </a>
+              </div>
+            </motion.nav>
           </>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }

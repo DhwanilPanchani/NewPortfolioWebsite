@@ -4,28 +4,11 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
-import { allProjects, featuredProjects } from '@/data/projects.json';
-import Tag from '@/app/components/shared/Tag';
-import { ImagePlaceholder } from '@/app/components/ui/ImagePlaceholder';
-import React, { use } from 'react';
+import { motion } from 'framer-motion';
+import projectsData from '@/data/projects.json';
+import { use } from 'react';
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  githubUrl: string;
-  liveUrl?: string;
-  featured: boolean;
-  category: string;
-  details?: {
-    challenge?: string;
-    solution?: string;
-    keyFeatures?: string[];
-    impact?: string[];
-  };
-}
+const allProjectsList = [...projectsData.featuredProjects, ...projectsData.allProjects];
 
 export default function ProjectDetailPage({
   params,
@@ -33,124 +16,142 @@ export default function ProjectDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-  const allProjectsList: Project[] = [...featuredProjects, ...allProjects] as Project[];
   const project = allProjectsList.find((p) => p.id === slug);
 
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
-  const details = project.details;
+  const details = (project as any).details;
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        {/* Back Button */}
+    <div className="min-h-screen pt-28 pb-24 px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Back */}
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-primary-light transition-colors mb-8"
+          data-cursor="hover"
+          className="inline-flex items-center gap-2 text-sm text-text-tertiary hover:text-text-primary transition-colors mb-12 group"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Projects
         </Link>
 
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="mb-10"
+        >
+          <span className="text-xs font-mono text-accent tracking-widest uppercase block mb-3">
+            {project.category}
+          </span>
+          <h1 className="font-display text-4xl lg:text-5xl font-bold text-text-primary mb-4">
             {project.title}
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-text-secondary text-lg leading-relaxed max-w-2xl">
             {project.description}
           </p>
 
-          {/* Links */}
-          <div className="mt-6 flex items-center gap-4">
-            <Link
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:scale-105 transition-transform"
-            >
-              <Github size={20} />
-              View on GitHub
-            </Link>
+          <div className="flex flex-wrap gap-3 mt-6">
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-text-primary bg-surface-raised border border-border hover:border-border-hover transition-all"
+              >
+                <Github className="w-4 h-4" />
+                GitHub
+              </a>
+            )}
             {project.liveUrl && project.liveUrl.trim() !== '' && (
-              <Link
+              <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 glass border border-gray-300 dark:border-gray-700 rounded-full font-medium hover:scale-105 transition-transform"
+                data-cursor="hover"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-[#0A0A0A] bg-accent hover:bg-accent-hover transition-all"
               >
-                <ExternalLink size={20} />
+                <ExternalLink className="w-4 h-4" />
                 Live Demo
-              </Link>
+              </a>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Image */}
-        <div className="relative rounded-2xl overflow-hidden mb-12">
-          {project.image ? (
-            <div className="relative h-96">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          ) : (
-            <ImagePlaceholder 
-              width={2560} 
-              height={1440} 
-              alt={project.title}
-              className="rounded-2xl"
-            />
-          )}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative h-80 lg:h-96 rounded-2xl overflow-hidden mb-12 bg-surface-raised border border-border"
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover opacity-85"
+            priority
+            sizes="(max-width: 1024px) 100vw, 896px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-raised/80 via-transparent to-transparent" />
+        </motion.div>
 
         {/* Technologies */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Technologies Used</h2>
-          <div className="flex flex-wrap gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-10"
+        >
+          <h2 className="font-display text-lg font-bold text-text-primary mb-4">Technologies</h2>
+          <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
-              <Tag key={tech} label={tech} />
+              <span key={tech} className="tag">{tech}</span>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Project Details */}
+        {/* Details */}
         {details && (
-          <div className="space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="space-y-6"
+          >
             {details.challenge && (
-              <div>
-                <h3 className="text-2xl font-bold mb-4">The Challenge</h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {details.challenge}
-                </p>
+              <div className="rounded-2xl p-7 bg-surface-raised border border-border">
+                <h3 className="font-display text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-accent" />
+                  The Challenge
+                </h3>
+                <p className="text-text-secondary leading-relaxed">{details.challenge}</p>
               </div>
             )}
 
             {details.solution && (
-              <div>
-                <h3 className="text-2xl font-bold mb-4">The Solution</h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {details.solution}
-                </p>
+              <div className="rounded-2xl p-7 bg-surface-raised border border-border">
+                <h3 className="font-display text-lg font-bold text-text-primary mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-accent" />
+                  The Solution
+                </h3>
+                <p className="text-text-secondary leading-relaxed">{details.solution}</p>
               </div>
             )}
 
             {details.keyFeatures && details.keyFeatures.length > 0 && (
-              <div>
-                <h3 className="text-2xl font-bold mb-4">Key Features</h3>
-                <ul className="grid gap-2">
-                  {details.keyFeatures.map((feature: string, index: number) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <span className="text-primary mt-1">•</span>
-                      <span className="text-gray-600 dark:text-gray-400">
-                        {feature}
-                      </span>
+              <div className="rounded-2xl p-7 bg-surface-raised border border-border">
+                <h3 className="font-display text-lg font-bold text-text-primary mb-4 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-accent" />
+                  Key Features
+                </h3>
+                <ul className="space-y-3">
+                  {details.keyFeatures.map((f: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-text-secondary">
+                      <span className="mt-2 w-1 h-1 rounded-full bg-accent flex-shrink-0" />
+                      {f}
                     </li>
                   ))}
                 </ul>
@@ -158,21 +159,22 @@ export default function ProjectDetailPage({
             )}
 
             {details.impact && details.impact.length > 0 && (
-              <div>
-                <h3 className="text-2xl font-bold mb-4">Impact</h3>
-                <ul className="grid gap-2">
-                  {details.impact.map((item: string, index: number) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <span className="text-primary mt-1">•</span>
-                      <span className="text-gray-600 dark:text-gray-400">
-                        {item}
-                      </span>
+              <div className="rounded-2xl p-7 bg-surface-raised border border-border">
+                <h3 className="font-display text-lg font-bold text-text-primary mb-4 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  Impact
+                </h3>
+                <ul className="space-y-3">
+                  {details.impact.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-text-secondary">
+                      <span className="mt-2 w-1 h-1 rounded-full bg-emerald-400 flex-shrink-0" />
+                      {item}
                     </li>
                   ))}
                 </ul>
               </div>
             )}
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

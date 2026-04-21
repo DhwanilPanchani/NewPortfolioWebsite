@@ -6,81 +6,67 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#6366F1', // Indigo
-          light: '#818CF8',
-          dark: '#4F46E5',
-        },
-        secondary: {
-          DEFAULT: '#EC4899', // Pink
-          light: '#F472B6',
-          dark: '#DB2777',
-        },
         accent: {
-          DEFAULT: '#14B8A6', // Teal
-          light: '#2DD4BF',
-          dark: '#0D9488',
-        },
-        background: {
-          light: '#FAFAFA',
-          dark: '#0A0A0F',
+          DEFAULT: '#E8643C',
+          hover: '#FF7A52',
+          muted: '#E8643C20',
+          subtle: '#E8643C10',
         },
         surface: {
-          light: '#FFFFFF',
-          dark: '#1A1A24',
+          DEFAULT: '#0A0A0A',
+          raised: '#141414',
+          overlay: '#1C1C1C',
+        },
+        border: {
+          DEFAULT: '#222222',
+          hover: '#333333',
+        },
+        text: {
+          primary: '#EDEDED',
+          secondary: '#888888',
+          tertiary: '#555555',
         },
       },
       fontFamily: {
-        sans: [
-          'var(--font-geist-sans)',
-          'Inter Variable',
-          'system-ui',
-          '-apple-system',
-          'sans-serif',
-        ],
-        mono: [
-          'var(--font-geist-mono)',
-          'Fira Code Variable',
-          'Consolas',
-          'monospace',
-        ],
-        display: ['Cal Sans', 'Inter Variable', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       animation: {
+        'spin-slow': 'spin 20s linear infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-subtle': 'pulseSubtle 4s ease-in-out infinite',
+        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+        'slide-down': 'slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         'fade-in': 'fadeIn 0.6s ease-out',
-        'fade-up': 'fadeUp 0.6s ease-out',
-        'scale-in': 'scaleIn 0.4s ease-out',
-        'float': 'float 3s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-12px)' },
+        },
+        pulseSubtle: {
+          '0%, 100%': { opacity: '0.4' },
+          '50%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideDown: {
+          '0%': { opacity: '0', transform: 'translateY(-12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        scaleIn: {
-          '0%': { opacity: '0', transform: 'scale(0.9)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.5)' },
-          '100%': { boxShadow: '0 0 40px rgba(99, 102, 241, 0.8)' },
-        },
       },
-      backdropBlur: {
-        xs: '2px',
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
     },
   },

@@ -1,117 +1,72 @@
 'use client';
 
 import Link from 'next/link';
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
-import React from 'react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
-interface SocialLink {
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-  label: string;
-}
-
-interface NavLink {
-  href: string;
-  label: string;
-}
-
-const socialLinks: SocialLink[] = [
-  {
-    href: 'https://github.com/DhwanilPanchani',
-    icon: Github,
-    label: 'GitHub',
-  },
-  {
-    href: 'https://linkedin.com/in/dhwanilpanchani',
-    icon: Linkedin,
-    label: 'LinkedIn',
-  },
-  {
-    href: 'mailto:dhwanilpanchani@gmail.com',
-    icon: Mail,
-    label: 'Email',
-  },
+const socials = [
+  { href: 'https://github.com/DhwanilPanchani', icon: Github, label: 'GitHub' },
+  { href: 'https://linkedin.com/in/dhwanilpanchani', icon: Linkedin, label: 'LinkedIn' },
+  { href: 'mailto:dhwanilpanchani@gmail.com', icon: Mail, label: 'Email' },
 ];
 
-const footerLinks: NavLink[] = [
-  { href: '/projects', label: 'Projects' },
+const links = [
+  { href: '/projects', label: 'Work' },
   { href: '/experience', label: 'Experience' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];
 
-const Footer: React.FC = () => {
+export default function Footer() {
   return (
-    <footer className="glass border-t border-gray-200 dark:border-gray-800">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {/* Brand */}
+    <footer className="border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        {/* Top row */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-12">
           <div>
-            <Link
-              href="/"
-              className="text-2xl font-bold text-primary hover:text-primary-light transition-colors"
-            >
-              Dhwanil Panchani
+            <Link href="/" className="font-display text-xl font-bold text-text-primary inline-block mb-2">
+              dhwanil<span className="text-accent">.</span>
             </Link>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              AI Engineer & Full-Stack Developer crafting intelligent solutions
-              with passion.
+            <p className="text-sm text-text-tertiary max-w-sm">
+              AI Engineer & Full-Stack Developer building intelligent digital experiences.
             </p>
           </div>
 
-          {/* Links */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white">
-              Navigation
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-base text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-primary-light transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white">
-              Connect
-            </h3>
-            <div className="mt-4 flex space-x-6">
-              {socialLinks.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-primary-light transition-colors"
-                    aria-label={link.label}
-                  >
-                    <Icon className="h-6 w-6" />
-                  </a>
-                );
-              })}
-            </div>
-          </div>
+          <nav className="flex flex-wrap gap-6">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-800">
-          <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-            &copy; {new Date().getFullYear()} Dhwanil Panchani. All rights reserved.
+        {/* Bottom row */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border">
+          <p className="text-xs text-text-tertiary font-mono">
+            &copy; {new Date().getFullYear()} Dhwanil Panchani
           </p>
+
+          <div className="flex items-center gap-4">
+            {socials.map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                data-cursor="hover"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-text-tertiary hover:text-accent transition-colors duration-200"
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
