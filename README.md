@@ -42,7 +42,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the site.
+
 
 ## 🛠️ Available Scripts
 ```bash
@@ -267,7 +267,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 Dhwanil Panchani - [dhwanilpanchani@gmail.com](mailto:dhwanilpanchani@gmail.com)
 
-Project Link: [https://github.com/DhwanilPanchani/portfolio](https://github.com/DhwanilPanchani/portfolio)
+
 
 ## 🙏 Acknowledgments
 
