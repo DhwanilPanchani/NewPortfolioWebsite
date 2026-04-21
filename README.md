@@ -267,7 +267,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 Dhwanil Panchani - [dhwanilpanchani@gmail.com](mailto:dhwanilpanchani@gmail.com)
 
-Project Link: [https://github.com/DhwanilPanchani/portfolio](https://github.com/DhwanilPanchani/portfolio)
 
 ## 🙏 Acknowledgments
 
