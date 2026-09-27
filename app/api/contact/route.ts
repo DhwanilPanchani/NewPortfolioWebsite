@@ -23,40 +23,30 @@ function rateLimit(ip: string, limit: number = 5, window: number = 60000) {
 
 export async function POST(request: NextRequest) {
   try {
-    const ip =
-      request.headers.get('x-forwarded-for') ||
-      request.headers.get('x-real-ip') ||
-      'unknown';
+    const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
 
     if (!rateLimit(ip)) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      );
+      return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
     }
 
     const body = await request.json();
     const { name, email, message } = body;
 
     if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: 'All fields are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
     }
 
     // Email sending is optional. If SMTP env vars are present, attempt to send.
-    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO } =
-      process.env as Record<string, string | undefined>;
+    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO } = process.env as Record<
+      string,
+      string | undefined
+    >;
 
     if (SMTP_HOST && SMTP_PORT && SMTP_USER && SMTP_PASS) {
       try {
@@ -85,10 +75,7 @@ export async function POST(request: NextRequest) {
       console.log('Contact submission:', { name, email, ip });
     }
 
-    return NextResponse.json(
-      { message: 'Message sent successfully!' },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: 'Message sent successfully!' }, { status: 200 });
   } catch (error) {
     console.error('Contact form error:', error);
     // Always return success to align with frontend UX choice

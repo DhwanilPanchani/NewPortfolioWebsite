@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 
 const siteConfig = {
   name: 'Dhwanil Panchani',
-  title: 'Dhwanil Panchani | AI Engineer & Full-Stack Developer',
+  title: 'Dhwanil Panchani — Software Engineer · Software should show its work',
   description:
-    'AI Engineer and Full-Stack Developer specializing in React, Next.js, TensorFlow, and cloud-native architecture. Building intelligent systems that deliver real business value.',
+    'Software engineer building payment risk engines, AI agent security, and LLM pipelines that have to prove their work. Explore the portfolio as a spatial operating system.',
   url: 'https://dhwanilpanchani.com',
   ogImage: 'https://dhwanilpanchani.com/og-image.jpg',
   links: {
@@ -21,15 +21,16 @@ export function generateSiteMetadata(): Metadata {
     },
     description: siteConfig.description,
     keywords: [
-      'AI Engineer',
-      'Full-Stack Developer',
-      'React',
-      'Next.js',
-      'TensorFlow',
-      'Machine Learning',
-      'Node.js',
+      'Software Engineer',
+      'Full-Stack Engineer',
+      'AI Agents',
+      'Agent Security',
+      'MCP',
+      'Payments',
+      'Java',
+      'Python',
       'TypeScript',
-      'Cloud Architecture',
+      'Boston',
     ],
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,

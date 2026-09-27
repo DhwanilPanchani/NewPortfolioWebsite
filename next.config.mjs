@@ -14,13 +14,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
+    optimizePackageImports: ['lucide-react', 'framer-motion', '@react-three/drei'],
   },
   webpack: (config, { isServer }) => {
     // Handle GLB/GLTF 3D models
@@ -41,6 +35,14 @@ const nextConfig = {
 
     return config;
   },
+  redirects: async () => [
+    { source: '/projects', destination: '/?open=projects', permanent: true },
+    { source: '/projects/:slug', destination: '/?open=projects&p=:slug', permanent: true },
+    { source: '/about', destination: '/?open=about', permanent: true },
+    { source: '/education', destination: '/?open=about', permanent: true },
+    { source: '/experience', destination: '/?open=experience', permanent: true },
+    { source: '/contact', destination: '/?open=contact', permanent: true },
+  ],
   headers: async () => [
     {
       source: '/(.*)',

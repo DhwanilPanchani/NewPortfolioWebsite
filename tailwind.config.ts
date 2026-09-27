@@ -1,72 +1,55 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './data/**/*.ts'],
   theme: {
     extend: {
       colors: {
-        accent: {
-          DEFAULT: '#E8643C',
-          hover: '#FF7A52',
-          muted: '#E8643C20',
-          subtle: '#E8643C10',
+        ink: {
+          DEFAULT: '#05060A',
+          900: '#080A10',
+          800: '#0D1018',
+          700: '#141824',
         },
-        surface: {
-          DEFAULT: '#0A0A0A',
-          raised: '#141414',
-          overlay: '#1C1C1C',
+        phosphor: '#C8FF4D',
+        signal: '#5EE7FF',
+        flare: '#FF5C7A',
+        fg: {
+          DEFAULT: '#E9ECF2',
+          dim: '#8A90A0',
+          faint: '#4A5060',
         },
-        border: {
-          DEFAULT: '#222222',
-          hover: '#333333',
-        },
-        text: {
-          primary: '#EDEDED',
-          secondary: '#888888',
-          tertiary: '#555555',
-        },
+        line: 'rgba(255,255,255,0.08)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'monospace'],
-      },
-      animation: {
-        'spin-slow': 'spin 20s linear infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-subtle': 'pulseSubtle 4s ease-in-out infinite',
-        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
-        'slide-down': 'slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-        'fade-in': 'fadeIn 0.6s ease-out',
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-12px)' },
+        blink: { '0%, 49%': { opacity: '1' }, '50%, 100%': { opacity: '0' } },
+        pulseDot: {
+          '0%': { boxShadow: '0 0 0 0 rgba(200,255,77,0.6)' },
+          '100%': { boxShadow: '0 0 0 10px rgba(200,255,77,0)' },
         },
-        pulseSubtle: {
-          '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '1' },
+        packetX: {
+          '0%': { left: '0%', opacity: '0' },
+          '10%, 90%': { opacity: '1' },
+          '100%': { left: '100%', opacity: '0' },
         },
-        slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(24px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        packetY: {
+          '0%': { top: '0%', opacity: '0' },
+          '10%, 90%': { opacity: '1' },
+          '100%': { top: '100%', opacity: '0' },
         },
-        slideDown: {
-          '0%': { opacity: '0', transform: 'translateY(-12px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
+        scan: { '0%': { transform: 'translateY(-100%)' }, '100%': { transform: 'translateY(100%)' } },
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      animation: {
+        blink: 'blink 1s steps(1) infinite',
+        pulseDot: 'pulseDot 1.8s ease-out infinite',
+        packetX: 'packetX 1.8s cubic-bezier(.5,0,.5,1) infinite',
+        packetY: 'packetY 1.8s cubic-bezier(.5,0,.5,1) infinite',
+        scan: 'scan 5s linear infinite',
       },
     },
   },
